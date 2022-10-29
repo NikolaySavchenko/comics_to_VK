@@ -1,6 +1,12 @@
 import requests
 from pathlib import Path
 
+def get_group_detail(token):
+    url = 'https://api.vk.com/method/groups.get'
+    payload = {'access_token': token, 'extended': '1', 'v': '5.131'}
+    response = requests.get(url, params=payload)
+    response.raise_for_status()
+    return response.json()['response']['items'][0]['id']
 
 def get_image(image_url):
     Path('comics').mkdir(parents=True, exist_ok=True)
@@ -21,9 +27,9 @@ def get_comics(comics_number):
     return comics_details['alt'], image_name
 
 
-def get_url_for_upload_photo(token):
+def get_url_for_upload_photo(token, group_id):
     url = 'https://api.vk.com/method/photos.getWallUploadServer'
-    payload = {'group_id': '216696628', 'access_token': token,
+    payload = {'group_id': group_id, 'access_token': token,
                'extended': '1', 'v': '5.131'}
     response = requests.get(url, params=payload)
     response.raise_for_status()
@@ -39,9 +45,9 @@ def upload_photo_VK(file_path, upload_url):
     return response.json()
 
 
-def save_photo_VK(token, upload_ansver):
+def save_photo_VK(token, upload_ansver, group_id):
     url = 'https://api.vk.com/method/photos.saveWallPhoto'
-    payload = {'group_id': '216696628', 'access_token': token,
+    payload = {'group_id': group_id, 'access_token': token,
                'extended': '1', 'v': '5.131'}
     payload.update(upload_ansver)
     response = requests.get(url, params=payload)
@@ -49,9 +55,9 @@ def save_photo_VK(token, upload_ansver):
     return response.json()
 
 
-def publication_comics(token, media_id, owner_id, message):
+def publication_comics(token, media_id, owner_id, message, group_id):
     url = 'https://api.vk.com/method/wall.post'
-    payload = {'owner_id': '-216696628', 'access_token': token,
+    payload = {'owner_id': f'-{group_id}', 'access_token': token,
                'attachments': f'photo{owner_id}_{media_id}', 'message': message,
                'extended': '1', 'v': '5.131'}
     response = requests.get(url, params=payload)
