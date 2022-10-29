@@ -24,7 +24,8 @@ def main():
     upload_details = upload_photo_VK(Path(f'comics/{comics_image_name}'), upload_photo_url)
     saving_photo_details = save_photo_VK(vk_token, upload_details, vk_group_id)
     publication_comics(vk_token, saving_photo_details['response'][0]['id'],
-                       saving_photo_details['response'][0]['owner_id'], comics_comment, vk_group_id)
+                       saving_photo_details['response'][0]['owner_id'],
+                       comics_comment, vk_group_id)
     os.remove(f'comics/{comics_image_name}')
 
 
