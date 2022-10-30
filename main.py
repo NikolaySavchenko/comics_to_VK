@@ -15,7 +15,8 @@ def main():
     load_dotenv()
     vk_token = os.environ['VK_TOKEN']
     Path('comics').mkdir(parents=True, exist_ok=True)
-    comic_number = randint(1, 2689)
+    max_comic_number = 2689
+    comic_number = randint(1, max_comic_number)
     comic_comment, comic_image_name = get_comic(comic_number)
     vk_group_id = get_group_detail(vk_token)
     upload_photo_url = get_url_for_upload_photo(vk_token, vk_group_id)
