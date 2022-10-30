@@ -10,16 +10,13 @@ from utils import get_url_for_upload_photo
 from utils import publication_comics
 from utils import save_photo_VK
 from utils import upload_photo_VK
-from pprint import pprint
 
 def main():
     load_dotenv()
     vk_token = os.environ['VK_TOKEN']
     Path('comics').mkdir(parents=True, exist_ok=True)
     comic_number = randint(1, 2689)
-    comic = get_comic(comic_number)
-    comic_image_name = comic[1]
-    comic_comment = comic[0]
+    comic_comment, comic_image_name = get_comic(comic_number)
     vk_group_id = get_group_detail(vk_token)
     upload_photo_url = get_url_for_upload_photo(vk_token, vk_group_id)
     upload_details = upload_photo_VK(Path(f'comics/{comic_image_name}'), upload_photo_url)
