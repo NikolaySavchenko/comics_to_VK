@@ -1,21 +1,13 @@
 import requests
 from pathlib import Path
 
+
 def get_group_detail(token):
     url = 'https://api.vk.com/method/groups.get'
     payload = {'access_token': token, 'extended': '1', 'v': '5.131'}
     response = requests.get(url, params=payload)
     response.raise_for_status()
     return response.json()['response']['items'][0]['id']
-
-def get_image(image_url):
-    Path('comics').mkdir(parents=True, exist_ok=True)
-    response = requests.get(image_url)
-    response.raise_for_status()
-    file_name = (image_url.split('/'))[-1]
-    with open(Path(f'comics/{file_name}'), 'wb') as file:
-        file.write(response.content)
-    return file_name
 
 
 def get_comics(comics_number):
