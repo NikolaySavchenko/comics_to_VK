@@ -19,11 +19,16 @@ def get_image(image_url):
 
 
 def get_comics(comics_number):
+    Path('comics').mkdir(parents=True, exist_ok=True)
     url = f'https://xkcd.com/{comics_number}/info.0.json'
     response = requests.get(url)
     response.raise_for_status()
     comics_details = response.json()
-    image_name = get_image(comics_details['img'])
+    response_image = requests.get(comics_details['img'])
+    response_image.raise_for_status()
+    image_name = (comics_details['img'].split('/'))[-1]
+    with open(Path(f'comics/{image_name}'), 'wb') as file:
+        file.write(response_image.content)
     return comics_details['alt'], image_name
 
 
