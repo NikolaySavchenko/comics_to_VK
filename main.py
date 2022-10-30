@@ -1,14 +1,15 @@
+import os
+from pathlib import Path
+from random import randint
+
+from dotenv import load_dotenv
+
 from utils import get_comics
-from utils import upload_photo_VK
-from utils import save_photo_VK
+from utils import get_group_detail
 from utils import get_url_for_upload_photo
 from utils import publication_comics
-from utils import get_group_detail
-from pathlib import Path
-from dotenv import load_dotenv
-from random import randint
-import os
-
+from utils import save_photo_VK
+from utils import upload_photo_VK
 
 
 def main():
