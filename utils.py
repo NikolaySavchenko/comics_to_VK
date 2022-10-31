@@ -55,8 +55,8 @@ def save_photo_VK(token, upl_hash, upl_photo, upl_server, group_id):
 def publish_comic(token, media_id, owner_id, message, group_id):
     url = 'https://api.vk.com/method/wall.post'
     payload = {'owner_id': f'-{group_id}', 'access_token': token,
-               'attachments': f'photo{owner_id}_{media_id}', 'message': message,
-               'extended': '1', 'v': '5.131'}
+               'attachments': f'photo{owner_id}_{media_id}',
+               'message': message, 'extended': '1', 'v': '5.131'}
     response = requests.get(url, params=payload)
     response.raise_for_status()
     return response
