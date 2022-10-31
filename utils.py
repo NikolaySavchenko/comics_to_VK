@@ -41,11 +41,11 @@ def upload_photo_VK(file_path, upload_url):
     return response.json()
 
 
-def save_photo_VK(token, upload_ansver, group_id):
+def save_photo_VK(token, upl_hash, upl_photo, upl_server, group_id):
     url = 'https://api.vk.com/method/photos.saveWallPhoto'
     payload = {'group_id': group_id, 'access_token': token,
+               'hash': upl_hash, 'photo': upl_photo, 'server': upl_server,
                'extended': '1', 'v': '5.131'}
-    payload.update(upload_ansver)
     response = requests.get(url, params=payload)
     response.raise_for_status()
     return response.json()
