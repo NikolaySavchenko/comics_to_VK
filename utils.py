@@ -1,5 +1,6 @@
-import requests
 from pathlib import Path
+
+import requests
 
 
 def get_group_detail(token):
