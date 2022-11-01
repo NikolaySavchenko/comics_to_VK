@@ -8,8 +8,8 @@ from utils import get_comic
 from utils import get_group_detail
 from utils import get_url_for_upload_photo
 from utils import publish_comic
-from utils import save_photo_VK
-from utils import upload_photo_VK
+from utils import save_photo_vk
+from utils import upload_photo_vk
 
 
 def main():
@@ -22,9 +22,9 @@ def main():
         comic_comment, comic_image_name = get_comic(comic_number)
         vk_group_id = get_group_detail(vk_token)
         upload_photo_url = get_url_for_upload_photo(vk_token, vk_group_id)
-        upload_details = upload_photo_VK(Path(f'comics/{comic_image_name}'),
+        upload_details = upload_photo_vk(Path(f'comics/{comic_image_name}'),
                                          upload_photo_url)
-        saving_photo_details = save_photo_VK(vk_token, upload_details['hash'],
+        saving_photo_details = save_photo_vk(vk_token, upload_details['hash'],
                                              upload_details['photo'],
                                              upload_details['server'],
                                              vk_group_id)
