@@ -4,7 +4,7 @@ from random import randint
 
 from dotenv import load_dotenv
 
-from utils import get_comic
+from utils import download_comic
 from utils import get_group_detail
 from utils import get_url_for_upload_photo
 from utils import publish_comic
@@ -19,7 +19,7 @@ def main():
     max_comic_number = 2689
     comic_number = randint(1, max_comic_number)
     try:
-        comic_comment, comic_image_name = get_comic(comic_number)
+        comic_comment, comic_image_name = download_comic(comic_number)
         vk_group_id = get_group_detail(vk_token)
         upload_photo_url = get_url_for_upload_photo(vk_token, vk_group_id)
         upload_details = upload_photo_vk(Path(f'comics/{comic_image_name}'),

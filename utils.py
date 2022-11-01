@@ -13,7 +13,7 @@ def get_group_detail(token):
     return response.json()['response']['items'][0]['id']
 
 
-def get_comic(comic_number):
+def download_comic(comic_number):
     url = f'https://xkcd.com/{comic_number}/info.0.json'
     response = requests.get(url)
     response.raise_for_status()
